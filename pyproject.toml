@@ -1,0 +1,14 @@
+[project]
+name = "k380-controller"
+version = "1.0.0"
+description = "Fn Lock controller for Logitech K380 keyboard"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["hidapi"]
+
+[project.scripts]
+k380-ctl = "k380_controller.cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
