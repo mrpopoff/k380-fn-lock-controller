@@ -139,8 +139,5 @@ MIT License
 - [dheygere/k380-fn-lock-for-windows]
 - [hidapi]
 
----
-Nikita A. Popov <<n.popov.79@gmail.com>> 2026
-
 [dheygere/k380-fn-lock-for-windows]: https://github.com/dheygere/k380-fn-lock-for-windows/
 [hidapi]: https://pypi.org/project/hidapi/
