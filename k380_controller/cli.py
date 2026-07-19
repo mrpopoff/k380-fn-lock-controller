@@ -52,7 +52,7 @@ Examples:
 def main() -> int:
     """CLI entry point."""
     args = parse_args()
-    set_mode = False if args.detect else True
+    set_mode = not args.detect
     mode = K380Mode.K380_MODE_FN_KEYS if args.fn_keys else K380Mode.K380_MODE_MEDIA_KEYS
 
     try:
@@ -62,19 +62,19 @@ def main() -> int:
 
             if set_mode:
                 k380.set_mode(mode)
-                
+
                 if mode == K380Mode.K380_MODE_FN_KEYS:
                     print("Set function keys as default (Fn Lock On)")
                 else:
                     print("Set media keys as default (Fn Lock Off)")
-            
+
             print("Done!")
 
     except DeviceNotFoundError:
         print("Error: K380 device not found!", file=sys.stderr)
         return 1
 
-    except (DeviceConnectionError, DeviceCommunicationError) as err:
+    except (DeviceConnectionError, DeviceCommunicationError):
         traceback.print_exc(file=sys.stderr)
         return 1
 

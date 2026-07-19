@@ -16,7 +16,7 @@ K380_PID: int = 45890  # 0xB342
 K380_TARGET_USAGE: int = 1
 K380_TARGET_USAGE_PAGE: int = 65280
 
-# K380 Fn Lock mode toggle magic sequences 
+# K380 Fn Lock mode toggle magic sequences
 K380_SEQ_FKEYS_ON: list[int] = [0x10, 0xFF, 0x0B, 0x1E, 0x00, 0x00, 0x00]
 K380_SEQ_FKEYS_OFF: list[int] = [0x10, 0xFF, 0x0B, 0x1E, 0x01, 0x00, 0x00]
 
@@ -31,22 +31,18 @@ class K380Mode(Enum):
 
 class K380Error(Exception):
     """Base exception."""
-    pass
 
 
 class DeviceNotFoundError(K380Error):
     """Raised when no K380 device is found."""
-    pass
 
 
 class DeviceConnectionError(K380Error):
     """Raised when device connection fails."""
-    pass
 
 
 class DeviceCommunicationError(K380Error):
     """Raised when device write fails."""
-    pass
 
 
 def _filter_usage_func(dev: dict) -> bool:
@@ -72,7 +68,7 @@ class K380Device:
         with K380Device() as k380:
             k380.set_mode(K380Mode.K380_MODE_FN_KEYS)
     """
-    
+
     def __init__(
         self,
         vid: int = K380_VID,
@@ -101,8 +97,13 @@ class K380Device:
 
         Raises:
             DeviceNotFoundError: If the device was not found.
-            DeviceConnectionError: If connection to the device could not be established or was not completed successfully.
+            DeviceConnectionError: If connection to the device
+            could not be established or was not completed
+            successfully.
         """
+        if self.is_open:
+            raise DeviceConnectionError("Device is already open")
+
         path = path if path is not None else self._path
 
         if path is None:
@@ -114,7 +115,7 @@ class K380Device:
 
         try:
             self._device = hid.device()
-            self._device.open_path(path)         
+            self._device.open_path(path)
         except OSError as e:
             self._device = None
             raise DeviceConnectionError(f"Failed to open device: {e}") from e
