@@ -142,6 +142,11 @@ class K380Device:
         """Ensure if device is opened."""
         return self._device is not None
 
+    @property
+    def path(self) -> str | None:
+        """Device path"""
+        return self._path
+
     def get_info(self) -> dict:
         """
         Returns device description.
