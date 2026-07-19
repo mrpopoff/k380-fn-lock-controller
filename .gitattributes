@@ -1,0 +1,9 @@
+# Handle all text files automatically and enforce LF on checkout
+* text=auto eol=lf
+
+# Explicitly mark binary files so Git never modifies their bytes
+*.png binary
+*.jpg binary
+*.gif binary
+*.pdf binary
+
