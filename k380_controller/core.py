@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from typing import Iterator
 
 import hid
-from typing import Iterator
 
 # K380 Vendor ID / Product ID
 K380_VID: int = 1133  # 0x46D
